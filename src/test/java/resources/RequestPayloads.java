@@ -1,12 +1,14 @@
 package resources;
 
 import pojo.UserDetails;
+import pojo.QuoteDetails;
 import pojo.User;
 
 public class RequestPayloads {
 	
 	UserDetails userDetailsdata;
 	User user;
+	QuoteDetails quoteData;
 	
 	public UserDetails createUserPayload(String login, String email, String password) 
 	{
@@ -29,6 +31,22 @@ public class RequestPayloads {
 		user.setFacebook_username(facebook_username);
 		userDetailsdata.setUser(user);
 		return userDetailsdata;
+	}
+	
+	public User createSessionPayload(String login, String password) 
+	{
+		user = new User();
+		user.setLogin(login);
+		user.setPassword(password);
+		return user;
+	}
+	
+	public QuoteDetails addQuotePayload(String author, String body) 
+	{
+		quoteData = new QuoteDetails();
+		quoteData.setAuthor(author);
+		quoteData.setBody(body);
+		return quoteData;
 	}
 	
 	

@@ -43,9 +43,9 @@ public class UserAPIStepDefinition extends Utils {
 	}
 
 	@Then("the API call got success with status code {int}")
-	public void the_API_call_got_success_with_status_code(Integer int1) {
+	public void the_API_call_got_success_with_status_code(Integer code) {
 		// To validate the status code 
-		Assert.assertEquals(response.getStatusCode(), 200);
+		Assert.assertEquals(response.getStatusCode(), code.intValue());
 	}
 
 	@Then("verify login generated maps to {string} using {string}")
