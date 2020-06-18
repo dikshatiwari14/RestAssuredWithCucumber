@@ -31,3 +31,14 @@ Scenario Outline: Verify if user is successfully updated using UpdateUser API
 	Examples: 
 		| login       | email                          | password   | facebook_username |
 		| diksha7 | _diksha@rest.com| Pass@123  | diksha@fb1                 |
+		
+Scenario Outline: Verify if user is updated when username doesnot exist using UpdateUser API 
+	Given Update User Payload with "<login>" "<email>" "<password>" "<facebook_username>" 
+	When user calls "updateUserAPI" with "PUT" http request 
+	Then the API call got success with status code 404 
+	And "message" in response body is "User not found" 
+	
+	Examples: 
+		| login            | email                          | password   | facebook_username |
+		| diksha111 | _diksha@rest.com| Pass@123  | diksha@fb1                 |
+		
