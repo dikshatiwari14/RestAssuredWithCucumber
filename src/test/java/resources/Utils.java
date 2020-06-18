@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
@@ -21,16 +20,17 @@ import io.restassured.specification.ResponseSpecification;
 
 public class Utils {
 	
+	public static RequestSpecification request;
 	public static RequestSpecification req;
 	public static ResponseSpecification resp;
-	public static Map<String,Object> headerMap;
+	public static Response response;
 	
 	public RequestSpecification requestSpecification() throws IOException 
 	{
 		if(req==null)
 		{
 		PrintStream log = new PrintStream(new FileOutputStream("logging.txt"));
-		req =new RequestSpecBuilder().setBaseUri(getGlobalProperties("baseURL")).setRelaxedHTTPSValidation()
+		req=new RequestSpecBuilder().setBaseUri(getGlobalProperties("baseURL")).setRelaxedHTTPSValidation()
 				.addFilter(RequestLoggingFilter.logRequestTo(log))
 				.addFilter(ResponseLoggingFilter.logResponseTo(log))
 				 .setContentType(ContentType.JSON).build();		
@@ -53,16 +53,16 @@ public class Utils {
 		return prop.getProperty(key);
 	}
 	
-	public String getJsonPath(Response response, String key) 
+	public String getJsonPath(Response resp, String key) 
 	{
-		String resp = response.asString();
-		JsonPath js= new JsonPath(resp);
+		String res = resp.asString();
+		JsonPath js= new JsonPath(res);
 		return js.get(key).toString();
 	}
 	
-	public void setHeader() 
+	public void setHeader(RequestSpecification request) 
 	{
-
+      
 	}
 	
 	public static String getRandomNumberString() {
@@ -74,11 +74,18 @@ public class Utils {
 	    // this will convert any number sequence into 3 character.
 	    return String.format("%03d", number);
 	}
-		
-	public Map<String, Object> setheader(String key, String value){
-		headerMap = new HashMap<String,Object>();
-		headerMap.put(key, value);
-		return headerMap;
+		public Response getHTTPMethod(RequestSpecification req, String resource, String method) 
+		{
+			APIResources resourceAPI = APIResources.valueOf(resource);
+
+			if (method.equalsIgnoreCase("POST"))
+				response = request.when().post(resourceAPI.getResource());
+			else if (method.equalsIgnoreCase("PUT"))
+				response = request.when().put(resourceAPI.getResource());
+			else if (method.equalsIgnoreCase("GET"))
+				response = request.when().get(resourceAPI.getResource());
+			return response;
+			
 		}
 	
 	}

@@ -14,11 +14,11 @@ import resources.Utils;
 
 public class UserAPIStepDefinition extends Utils {
 
-	RequestSpecification request;
-	Response response;
+	//RequestSpecification request;
+	//Response response;
 	RequestPayloads payload = new RequestPayloads();
 	static String login;
-	static String User_Token;
+	static String User_Token = "";
 
 	@Given("Create User Payload with {string} {string} {string}")
 	public void create_User_Payload_with(String login, String email, String password) throws IOException {
@@ -27,19 +27,13 @@ public class UserAPIStepDefinition extends Utils {
 		request = given().spec(requestSpecification())
 				.header("authorization",getGlobalProperties("authorization"))
 				.body(payload.createUserPayload(login, email, password));
+		System.out.println(request.toString());
 	}
 
 	@When("user calls {string} with {string} http request")
 	public void user_calls_with_http_request(String resource, String method) {
 		// To call the respective API 
-		APIResources resourceAPI = APIResources.valueOf(resource);
-
-		if (method.equalsIgnoreCase("POST"))
-			response = request.when().post(resourceAPI.getResource());
-		else if (method.equalsIgnoreCase("PUT"))
-			response = request.when().put(resourceAPI.getResource());
-		else if (method.equalsIgnoreCase("GET"))
-			response = request.when().get(resourceAPI.getResource());
+		response = getHTTPMethod(request, resource, method);
 	}
 
 	@Then("the API call got success with status code {int}")
@@ -58,6 +52,7 @@ public class UserAPIStepDefinition extends Utils {
 				.header("authorization",getGlobalProperties("authorization"))
 				.header("User-Token", User_Token);
 		user_calls_with_http_request(resource, "GET");
+		System.out.println(response.prettyPrint());
 		String actualLogin = getJsonPath(response, "login");
 		Assert.assertEquals(actualLogin, expectedLogin);
 

@@ -1,5 +1,5 @@
 Feature: Validating the Users APIs 
-
+@diksha
 Scenario Outline: Verify if user is successfully added using CreateUser API 
 	Given Create User Payload with "<login>" "<email>" "<password>" 
 	When user calls "createUserAPI" with "POST" http request 
@@ -8,7 +8,7 @@ Scenario Outline: Verify if user is successfully added using CreateUser API
 	
 	Examples: 
 		| login            | email                          | password  |
-		| diksha111      | diksha111@rest.com| Pass@123 |
+		| diksha62      | diksha62@rest.com| Pass@123 |
 		
 Scenario Outline: Verify if user is added with invalid data using CreateUser API 
 	Given Create User Payload with "<login>" "<email>" "<password>" 
@@ -21,7 +21,7 @@ Scenario Outline: Verify if user is added with invalid data using CreateUser API
 		| diksha1           | dikshaa@rest.com | Pass@123 |Username has already been taken|
 		| diksha12345| diksha@rest | Pass@123              |Email is not a valid email|
 	    | diksha12345| diksha@rest.com | Pas              |Password is too short (minimum is 5 characters)|
-	    
+@diksha	    
 Scenario Outline: Verify if user is successfully updated using UpdateUser API 
 	Given Update User Payload with "<login>" "<email>" "<password>" "<facebook_username>" 
 	When user calls "updateUserAPI" with "PUT" http request 
