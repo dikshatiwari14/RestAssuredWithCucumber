@@ -9,9 +9,12 @@ public enum APIResources {
 	addQuoteAPI("/api/quotes"),
 	getQuoteAPI("/api/quotes/{quote_id}"),
 	hideQuoteAPI("/api/quotes/{quote_id}/hide"),
-	favQuoteAPI("/api/quotes/{quote_id}/fav");
+	favQuoteAPI("/api/quotes/{quote_id}/fav"),
+	followActivityAPI("/api/activities/follow/"),
+	deleteActivityAPI("/api/activities/{activity_id}"),
+	getActivityAPI("/api/activities/");
 	
-	
+
 	private String resource;
 	
 	APIResources(String resource)
