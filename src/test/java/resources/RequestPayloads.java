@@ -1,6 +1,7 @@
 package resources;
 
 import pojo.UserDetails;
+import pojo.Quote;
 import pojo.QuoteDetails;
 import pojo.User;
 
@@ -8,7 +9,8 @@ public class RequestPayloads {
 	
 	UserDetails userDetailsdata;
 	User user;
-	QuoteDetails quoteData;
+	QuoteDetails quoteDetailsData;
+	Quote quote;
 	
 	public UserDetails createUserPayload(String login, String email, String password) 
 	{
@@ -43,10 +45,12 @@ public class RequestPayloads {
 	
 	public QuoteDetails addQuotePayload(String author, String body) 
 	{
-		quoteData = new QuoteDetails();
-		quoteData.setAuthor(author);
-		quoteData.setBody(body);
-		return quoteData;
+		quote = new Quote();
+		quoteDetailsData = new QuoteDetails();
+		quote.setAuthor(author);
+		quote.setBody(body);
+		quoteDetailsData.setQuote(quote);
+		return quoteDetailsData;
 	}
 	
 	

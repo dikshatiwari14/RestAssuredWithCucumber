@@ -27,7 +27,6 @@ public class UserAPIStepDefinition extends Utils {
 		request = given().spec(requestSpecification())
 				.header("authorization",getGlobalProperties("authorization"))
 				.body(payload.createUserPayload(login, email, password));
-		System.out.println(request.toString());
 	}
 
 	@When("user calls {string} with {string} http request")
@@ -52,7 +51,6 @@ public class UserAPIStepDefinition extends Utils {
 				.header("authorization",getGlobalProperties("authorization"))
 				.header("User-Token", User_Token);
 		user_calls_with_http_request(resource, "GET");
-		System.out.println(response.prettyPrint());
 		String actualLogin = getJsonPath(response, "login");
 		Assert.assertEquals(actualLogin, expectedLogin);
 

@@ -7,7 +7,11 @@ public enum APIResources {
 	getUserAPI("/api/users/{login}"),
 	createSessionAPI("/api/session"),
 	addQuoteAPI("/api/quotes"),
-	getQuoteAPI("/api/quotes/{quote_id}");
+	getQuoteAPI("/api/quotes/{quote_id}"),
+	hideQuoteAPI("/api/quotes/{quote_id}/hide"),
+	favQuoteAPI("/api/quotes/{quote_id}/fav");
+	
+	
 	private String resource;
 	
 	APIResources(String resource)
