@@ -84,6 +84,8 @@ public class Utils {
 				response = request.when().put(resourceAPI.getResource());
 			else if (method.equalsIgnoreCase("GET"))
 				response = request.when().get(resourceAPI.getResource());
+			else if (method.equalsIgnoreCase("DELETE"))
+				response = request.when().delete(resourceAPI.getResource());
 			return response;
 			
 		}

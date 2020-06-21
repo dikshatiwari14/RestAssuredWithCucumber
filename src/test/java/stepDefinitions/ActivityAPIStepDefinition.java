@@ -13,6 +13,7 @@ import resources.Utils;
 public class ActivityAPIStepDefinition extends Utils {
 	
 	public String global_User_Token = "q5HWAfJuc8Axkt6ZTgW1tFrUdcgkam1QhOyMWBXpMT/wkyGvxgooSPXoAzj/CzNN050Vvpbyn4jBIl94J5xQTA==";
+	public static String activityID;
 	
 	@Given("the {string} and {string} for request")
 	public void the_and_for_request(String type, String filter) throws IOException {
@@ -31,5 +32,16 @@ public class ActivityAPIStepDefinition extends Utils {
 
 	}
 
+	@Given("the activityID of any activity")
+	public void the_activityID_of_any_activity() throws IOException {
+	    // Write code here that turns the phrase above into concrete actions	
+		if(activityID == null) 
+		{
+			activityID = getJsonPath(response, "activities[0].activity_id");	
+		}
+		request = given().spec(requestSpecification()).pathParam("activity_id", activityID)
+				.header("authorization",getGlobalProperties("authorization"))
+				.header("User-Token", global_User_Token);		    
+	}
 
 }
