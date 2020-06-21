@@ -12,7 +12,9 @@ public enum APIResources {
 	favQuoteAPI("/api/quotes/{quote_id}/fav"),
 	followActivityAPI("/api/activities/follow/"),
 	deleteActivityAPI("/api/activities/{activity_id}"),
-	getActivityAPI("/api/activities/");
+	getActivityAPI("/api/activities/"),
+	forgotPasswordAPI("/api/users/forgot_password"),
+	resetPasswordAPI("/api/users/reset_password");
 	
 
 	private String resource;

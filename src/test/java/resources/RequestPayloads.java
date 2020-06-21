@@ -35,6 +35,25 @@ public class RequestPayloads {
 		return userDetailsdata;
 	}
 	
+	public UserDetails forgotPasswordPayload(String email) 
+	{
+		userDetailsdata = new UserDetails();
+		user = new User();
+		user.setEmail(email);
+		userDetailsdata.setUser(user);
+		return userDetailsdata;
+	}
+	
+	public UserDetails resetPasswordPayload(String email, String reset_password_token) 
+	{
+		userDetailsdata = new UserDetails();
+		user = new User();
+		user.setEmail(email);
+		user.setReset_password_token(reset_password_token);
+		userDetailsdata.setUser(user);
+		return userDetailsdata;
+	}
+	
 	public User createSessionPayload(String login, String password) 
 	{
 		user = new User();
@@ -52,7 +71,5 @@ public class RequestPayloads {
 		quoteDetailsData.setQuote(quote);
 		return quoteDetailsData;
 	}
-	
-	
 
 }

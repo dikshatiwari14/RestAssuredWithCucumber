@@ -6,16 +6,11 @@ import org.testng.Assert;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import resources.APIResources;
 import resources.RequestPayloads;
 import resources.Utils;
 
 public class UserAPIStepDefinition extends Utils {
 
-	//RequestSpecification request;
-	//Response response;
 	RequestPayloads payload = new RequestPayloads();
 	static String login;
 	static String User_Token = "";
@@ -72,6 +67,22 @@ String randomNumber = getRandomNumberString();
 	public void in_response_body_is(String keyValue, String expectedValue) {
 		// To validate that login value is updated with the provided value
 		Assert.assertEquals(getJsonPath(response, keyValue), expectedValue);
+	}
+	
+	@Given("Forgot Password Payload with  {string}")
+	public void forgot_Password_Payload_with(String email) throws IOException {
+	    // Write code here that turns the phrase above into concrete actions
+		request = given().spec(requestSpecification())
+				.header("authorization",getGlobalProperties("authorization"))
+				.body(payload.forgotPasswordPayload( email));	    
+	}
+
+	@Given("Reset Password Payload with  {string} {string}")
+	public void reset_Password_Payload_with(String email, String reset_password_token) throws IOException {
+	    // Write code here that turns the phrase above into concrete actions
+		request = given().spec(requestSpecification())
+				.header("authorization",getGlobalProperties("authorization"))
+				.body(payload.resetPasswordPayload( email,reset_password_token));	    
 	}
 
 }

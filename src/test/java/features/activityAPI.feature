@@ -1,7 +1,6 @@
 Feature: Validating the Activitiy APIs 
 
-Scenario Outline: 
-	Verify the follow activity API to follow a user, tag or author with valid data 
+Scenario Outline: Verify the follow activity API to follow a user, tag or author with valid data 
 	Given the "<type>" and "<filter>" for request 
 	When user calls "followActivityAPI" with "PUT" http request 
 	Then the API call got success with status code 200 
@@ -13,8 +12,7 @@ Scenario Outline:
 		| author |    diksha          |
 		| tag        | motivational |
 		
-Scenario Outline: 
-	Verify the follow activity API to follow a user, tag or author with invalid data 
+Scenario Outline: Verify the follow activity API to follow a user, tag or author with invalid data 
 	Given the "<type>" and "<filter>" for request 
 	When user calls "followActivityAPI" with "PUT" http request 
 	Then the API call got success with status code 404 
@@ -27,8 +25,7 @@ Scenario Outline:
 		| author | dikshatiwari |Author not found.|50                  |
 		| tag        | zzzz                 |Tag not found.       | 60                 |
 		
-Scenario Outline: 
-	Verify the get activity API to get the activities of a user, tag or author with invalid data 
+Scenario Outline: Verify the get activity API to get the activities of a user, tag or author with invalid data 
 	Given the "<type>" and "<filter>" for request 
 	When user calls "getActivityAPI" with "GET" http request 
 	Then the API call got success with status code 404 
@@ -41,8 +38,7 @@ Scenario Outline:
 		| author | zzzz |Author not found.|50                  |
 		| tag        | zzzz |Tag not found.       | 60                 |
 		
-Scenario Outline: 
-	Verify the get activity API to get the activities of a user, tag or author with valid data 
+Scenario Outline: Verify the get activity API to get the activities of a user, tag or author with valid data 
 	Given the "<type>" and "<filter>" for request 
 	When user calls "getActivityAPI" with "GET" http request 
 	Then the API call got success with status code 200 
@@ -53,15 +49,13 @@ Scenario Outline:
 		| author | diksha |
 		| user       | dikshatiwari |
 		
-Scenario: 
-	Verify the delete activity API to delete any activity with valid activity id
+Scenario: Verify the delete activity API to delete any activity with valid activity id
 	Given the activityID of any activity 
 	When user calls "deleteActivityAPI" with "DELETE" http request 
 	Then the API call got success with status code 200 
 	And verify "status" in response maps to "ok" 
 	
-Scenario Outline: 
-	Verify the delete activity API to delete any activity with invalid activity id
+Scenario Outline: Verify the delete activity API to delete any activity with invalid activity id
 	Given the activityID of any activity 
 	When user calls "deleteActivityAPI" with "DELETE" http request 
 	Then the API call got success with status code 404 
