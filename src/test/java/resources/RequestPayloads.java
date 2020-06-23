@@ -54,12 +54,14 @@ public class RequestPayloads {
 		return userDetailsdata;
 	}
 	
-	public User createSessionPayload(String login, String password) 
+	public UserDetails createSessionPayload(String login, String password) 
 	{
+		userDetailsdata = new UserDetails();
 		user = new User();
 		user.setLogin(login);
 		user.setPassword(password);
-		return user;
+		userDetailsdata.setUser(user);
+		return userDetailsdata;
 	}
 	
 	public QuoteDetails addQuotePayload(String author, String body) 
